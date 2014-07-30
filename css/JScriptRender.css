@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+/*
+ * JScript Render - Stylesheet
+ * http://development.pleets.org/apps/j-render
+ *
+ * Copyright 2014, Pleets Apps
+ * Free to use under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ */
+ 
+/* Load components */
+@import "core.css";
+@import "html.css";
+@import "loader.css";
+@import "dialog.css";
+@import "progress-bar.css";
+
+/* CSS Render Updates */
+
+/* Gallery */
+
+*[class~="simple-gallery"] { background: rgb(255,255,255); overflow: hidden; }
+*[class~="simple-gallery"] [class~="item"] { width: 150px; height: 150px; overflow: hidden; margin: 2px; border: solid 3px rgb(240,240,240); float: left; }
+*[class~="simple-gallery"] [class~="item"] img { height: 100%; }
+
+*[class~="simple-gallery"][class~="tiny"] [class~="item"] { width: 50px; height: 50px; }
+
+.file-item { display: inline-block; overflow: hidden; }
+.file-item .name > span, .file-item .size > span, .file-item .type > span { font-weight: bold; }
+.file-item img { float: left; }
+
+div.item {
+    display: inline-block;
+    margin: 2px; padding: 5px;
+    border: solid 1px rgb(235,235,235);
+}
