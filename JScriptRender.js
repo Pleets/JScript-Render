@@ -25,6 +25,8 @@ else {
     JScriptRender.PATH = '.';
 }
 
+JScriptRender.STATE = 'loading';
+
 /* Standard class */
 JScriptRender.StdClass = 
 {
@@ -107,6 +109,30 @@ JScriptRender.StdClass =
             });
         else
             callback();
+    },
+    ready: function(handler)
+    {
+        handler = handler || new Function();
+
+        var libReady = function(handler) 
+        {
+            setTimeout(function(){
+                if (JScriptRender.STATE == "complete")
+                    handler();
+                else
+                    return libReady(handler);
+            }, 100);
+        }
+
+        if (document.readyState == "complete")
+            libReady(handler);
+        else {
+            document.onreadystatechange = function () {
+                if (document.readyState == "complete") {
+                    libReady(handler);
+                }
+            }
+        }
     }
 }
 
@@ -145,5 +171,5 @@ $j.array_include([
     'readers/File.js',
 
 ], function(){
-    $j.include('demo.js');
+    JScriptRender.STATE = 'complete';
 });
