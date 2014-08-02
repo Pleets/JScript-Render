@@ -5,12 +5,25 @@
  * Free to use under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
  *
- * Date: 2014-07-30
+ * Date: 2014-08-02
  */
 
 /* JScriptRender alias */
 if (!window.hasOwnProperty('JScriptRender'))
     JScriptRender = {};
+
+/* relative path to the element whose script is currently being processed.*/
+if (typeof document.currentScript != "undefined" && document.currentScrip != null)
+{
+    var str = document.currentScript.src;
+    JScriptRender.PATH = (str.lastIndexOf("/") == -1) ? "." : str.substring(0, str.lastIndexOf("/"));
+}
+else {
+    /* alternative method to get the currentScript (older browsers) */
+        // ...
+    /* else get the URL path */
+    JScriptRender.PATH = '.';
+}
 
 /* Standard class */
 JScriptRender.StdClass = 
@@ -18,6 +31,8 @@ JScriptRender.StdClass =
     include: function(url, ajax, callback) 
     {
         callback = callback || new Function();
+
+        url = JScriptRender.PATH + '/' + url;
 
         if (typeof ajax == "undefined" || ajax == false)
         {
