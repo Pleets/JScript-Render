@@ -13,7 +13,7 @@ if (!window.hasOwnProperty('JScriptRender'))
     JScriptRender = {};
 
 /* relative path to the element whose script is currently being processed.*/
-if (typeof document.currentScript != "undefined" && document.currentScrip != null)
+if (typeof document.currentScript != "undefined" && document.currentScript != null)
 {
     var str = document.currentScript.src;
     JScriptRender.PATH = (str.lastIndexOf("/") == -1) ? "." : str.substring(0, str.lastIndexOf("/"));
