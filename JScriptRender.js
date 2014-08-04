@@ -5,7 +5,7 @@
  * Free to use under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
  *
- * Date: 2014-08-02
+ * Date: 2014-08-03
  */
 
 /* JScriptRender alias */
@@ -169,6 +169,12 @@ $j.array_include([
     
     // Readers
     'readers/File.js',
+
+    // jQuery utils
+    'jquery/Ajax.js',
+    'jquery/UI.js',
+    'jquery/Debug.js',
+    'jquery/Animation.js',
 
 ], function(){
     JScriptRender.STATE = 'complete';
