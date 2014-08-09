@@ -15,17 +15,14 @@ if (!window.hasOwnProperty('JScriptRender'))
 if (!JScriptRender.hasOwnProperty('html'))
   JScriptRender.html = new Object();
 
-/* Form class */
-JScriptRender.html.Loader = function(settings, callback)
+/* Loader class */
+JScriptRender.html.Loader = function(settings)
 {
    var set = settings || {};
 
    // Binds an HTMLObject or jQuery selector
    set.context = (typeof set.context !== "undefined" && set.context !== null) ? set.context : null;
    set.height = set.height || 50;
-
-   // callback
-   callback = callback || new Function();
 
    // Settings
    this.context = set.context;
@@ -35,8 +32,6 @@ JScriptRender.html.Loader = function(settings, callback)
    this.overlay = new JScriptRender.html.Overlay();
    this.interval = null;
    this.state = false;
-
-   this.callback = callback;
 }
 
 JScriptRender.html.Loader.prototype = 
@@ -45,7 +40,7 @@ JScriptRender.html.Loader.prototype =
    {
       return this.state;
    },
-   show: function()
+   show: function(callback)
    {
       var that = this;            // class reference
       var loader = document.querySelector("#" + this.selector);
@@ -63,6 +58,9 @@ JScriptRender.html.Loader.prototype =
          }
          else
             context = document.querySelector('body');
+
+         // callback
+         callback = callback || new Function();
 
          // Create Canvas element
          /* Creates the canvas element and set the basic classes for it */  
@@ -113,7 +111,7 @@ JScriptRender.html.Loader.prototype =
 
       // Frequency of requests
       if (this.isActive())
-         return setTimeout(function(){ that.show(); }, 50);    // frecuency
+         return setTimeout(function(){ that.show(callback); }, 50);    // frecuency
 
       // Update state
       setTimeout(function() { that.state = true; }, 0);    // duration
@@ -127,14 +125,17 @@ JScriptRender.html.Loader.prototype =
             return renderLoader(this, this.context);
       }
    },
-   hide: function()
+   hide: function(callback)
    {
       var that = this;           // class reference
       var loader = document.querySelector("#" + this.selector);
 
+      // callback
+      callback = callback || new Function();
+
       // Frequency of requests
       if (!(this.isActive()))
-         return setTimeout(function(){ that.hide(); }, 50);    // frecuency
+         return setTimeout(function(){ that.hide(callback); }, 50);    // frecuency
 
       // Update state
       setTimeout(function() { that.state = false; }, 0);    // duration
@@ -146,7 +147,7 @@ JScriptRender.html.Loader.prototype =
       setTimeout(function(){
          loader.parentNode.removeChild(loader); window.clearInterval(that.interval);
          that.interval = null;
-         that.callback();
+         callback();
       }, 299);        // This time is equals to loader duration or slightly lower
    }
 }

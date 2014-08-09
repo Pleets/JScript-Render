@@ -15,11 +15,11 @@ if (!window.hasOwnProperty('JScriptRender'))
 if (!JScriptRender.hasOwnProperty('html'))
   JScriptRender.html = new Object();
 
-/* Form class */
+/* Overlay class */
 JScriptRender.html.Overlay = function(settings, callback)
 {
-   JScriptRender.html.Overlay.prototype.selector = "JScriptRender-overlay-"+Math.random().toFixed(9).substring(2);
-   JScriptRender.html.Overlay.prototype.state = false;
+   this.selector = "JScriptRender-overlay-"+Math.random().toFixed(9).substring(2);
+   this.state = false;
 }
 
 JScriptRender.html.Overlay.prototype =

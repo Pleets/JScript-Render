@@ -87,11 +87,16 @@ JScriptRender.jquery.Ajax.prototype  =
             },
             success: function(data)
             {
-                view.append(data);
+                loader.hide(function(){
+                    view.append(data);
+                });
                 set.ajaxCallback.success();
             },
-            complete: function() { 
-                loader.hide();
+            complete: function() {
+                setTimeout(function(){
+                    if (loader.isActive())
+                        loader.hide();                    
+                }, 1000);
                 set.ajaxCallback.complete() 
             }
         });
@@ -150,12 +155,17 @@ JScriptRender.jquery.Ajax.prototype  =
                         loader.show();
                     },
                     success: function(data) {
-                        form.empty();
-                        form.append(data);
+                        loader.hide(function(){
+                            form.empty();
+                            form.append(data);
+                        });
                         set.ajaxCallback.get.success();
                     },
                     complete: function() {
-                        loader.hide();
+                        setTimeout(function(){
+                            if (loader.isActive())
+                                loader.hide();                    
+                        }, 1000);
                         set.ajaxCallback.get.complete();
                     }
                 });
@@ -327,7 +337,7 @@ JScriptRender.jquery.Ajax.prototype  =
 
                         loader.show();
                         loadData(formElements, function () { 
-                            loader.hide(); 
+                            loader.hide();
                             if (set.searchConfig.view !== undefined)
                                $(set.searchConfig.view).empty();
                             if (set.searchConfig.input !== undefined)
@@ -454,6 +464,9 @@ JScriptRender.jquery.Ajax.prototype  =
                             data: { request: data },
                             dataType: 'json',
                             async: true,
+                            beforeSend: function() {
+                                loader.show();
+                            },
                             error: function(jqXHR, textStatus, error) {
                                 $.ajax({
                                     url: url,
@@ -470,9 +483,6 @@ JScriptRender.jquery.Ajax.prototype  =
                                 });
 
                                 DEBUG.ajaxError(jqXHR, textStatus, error);
-                            },
-                            beforeSend: function() {
-                                loader.show();
                             },
                             success: function(data)
                             {
@@ -528,12 +538,17 @@ JScriptRender.jquery.Ajax.prototype  =
                     container.empty().append(error);
                     DEBUG.ajaxError(jqXHR, textStatus, error);
                 },
-                beforeSend: function() {
-                    loader.show();
-                },
                 success: function(data) {
-                    container.empty().append(data);
-                }
+                    loader.hide(function(){
+                        container.empty().append(data);
+                    });
+                },
+                complete: function() {
+                    setTimeout(function(){
+                        if (loader.isActive())
+                            loader.hide();                    
+                    }, 1000);
+                },
             });
         });
     }

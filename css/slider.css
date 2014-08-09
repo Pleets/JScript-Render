@@ -12,6 +12,7 @@
 /* Slide */
 
 .jrender-slide { position: relative; z-index: 29; text-align: center; padding-bottom: 50px; overflow: hidden; }
+.jrender-slide > .item { display: block; }
 .jrender-slide > .item > * { text-align: left; }
 
 .jrender-slide > .state { display: inline-block; min-width: 40px; min-height: 40px; background: rgb(230,230,230); 
