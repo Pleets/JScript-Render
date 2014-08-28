@@ -38,6 +38,9 @@ JScriptRender.html.Loader.prototype =
 {
    isActive: function()
    {
+     /* for some reason the object does not exist */
+      if (document.querySelector("#" + this.selector) == null)
+        return false;     
       return this.state;
    },
    show: function(callback)
