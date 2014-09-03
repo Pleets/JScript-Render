@@ -66,3 +66,13 @@ button[class~="jButton"]
     -o-user-select: none;
     user-select: none;    
 }
+
+.file-item { display: inline-block; overflow: hidden; }
+.file-item .name > span, .file-item .size > span, .file-item .type > span { font-weight: bold; }
+.file-item img { float: left; }
+
+div.item {
+    display: inline-block;
+    margin: 2px; padding: 5px;
+    border: solid 1px rgb(235,235,235);
+}

@@ -29,10 +29,10 @@ JScriptRender.reader.File = function(settings)
 
    set.fileFormat = set.fileFormat || "any";   		// set file format
 
-   JScriptRender.reader.File.prototype.fileBox = set.fileBox;
-   JScriptRender.reader.File.prototype.dropBox = set.dropBox;
-   JScriptRender.reader.File.prototype.previewBox = set.preview;
-   JScriptRender.reader.File.prototype.url = set.url;
+   this.fileBox = set.fileBox;
+   this.dropBox = set.dropBox;
+   this.previewBox = set.preview;
+   this.url = set.url;
 
    switch (set.fileFormat.toLowerCase()) {
       case "excel":
@@ -47,9 +47,6 @@ JScriptRender.reader.File = function(settings)
       default:
          var fileFormat = false;    // unknown format
    }
-
-   JScriptRender.reader.File.prototype.filter = fileFormat;
-   JScriptRender.reader.File.prototype.size = set.size;
 
    this.filter = fileFormat;
    this.size = set.size;
@@ -135,7 +132,7 @@ JScriptRender.reader.File.prototype =
          preview(formData[i]);
       };
    },
-   upload: function(files) 
+   upload: function(files, callback) 
    {
       var xhr = new XMLHttpRequest();
       xhr.open('POST', this.url);
@@ -152,12 +149,15 @@ JScriptRender.reader.File.prototype =
 
       this.previewBox.appendChild(progress);
 
+      callback = callback || new Function();
+
       xhr.onreadystatechange = function()
       {
          if (xhr.readyState == 4 && xhr.status == 200) 
          {
-            that.previewBox.innerHTML += xhr.responseText;
+            //that.previewBox.innerHTML += xhr.responseText;
             document.querySelector("#JScriptRender-file-progress").parentNode.removeChild(document.querySelector("#JScriptRender-file-progress"));
+            allback(xhr.responseText);
          }
          console.info(xhr.readyState + " - " + xhr.status);
       }
