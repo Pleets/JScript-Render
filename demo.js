@@ -66,7 +66,7 @@ $j.ready(function(){
    var ctx2 = document.querySelector("#context-loader-2");
 
    var context2 = ctx2.getAttribute("data-context");
-   var loader2 = new $j.html.Loader({ context: document.querySelector("#" + context2) });
+   var loader2 = new $j.html.Loader({ context: document.querySelector("#" + context2), width: 150, height: 40 });
 
    ctx2.addEventListener("click", function(){
    	if (loader2.isActive())
