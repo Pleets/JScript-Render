@@ -31,8 +31,8 @@ JScriptRender.validator.StringLength = function(settings)
    // Get a natural number as parameter grater tha the minumun value or set the maximum value to undefined
    set.max = (set.max > set.min) ? set.max : undefined;
 
-   JScriptRender.validator.StringLength.prototype.min = set.min;
-   JScriptRender.validator.StringLength.prototype.max = set.max;
+   this.min = set.min;
+   this.max = set.max;
 }
 
 JScriptRender.validator.StringLength.prototype =
