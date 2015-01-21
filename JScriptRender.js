@@ -176,6 +176,9 @@ $j.array_include([
     'jquery/Debug.js',
     'jquery/Animation.js',
 
+    // Utils
+    'utils/DateControl.js',
+
 ], function(){
     JScriptRender.STATE = 'complete';
 });
