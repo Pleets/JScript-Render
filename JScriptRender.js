@@ -144,7 +144,7 @@ for (var f in $jS.StdClass) {
 
 /* Load classes */
 
-$j.array_include([
+$jS.array_include([
 
     // Validators
     'validator/MathExpression.js',
