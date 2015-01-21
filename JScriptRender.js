@@ -137,9 +137,9 @@ JScriptRender.StdClass =
 }
 
 /* Short alias */
-var $j = JScriptRender;
-for (var f in $j.StdClass) {
-    $j[f] = $j.StdClass[f];
+var $jS = JScriptRender;
+for (var f in $jS.StdClass) {
+    $jS[f] = $jS.StdClass[f];
 };
 
 /* Load classes */
