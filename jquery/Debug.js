@@ -22,7 +22,7 @@ if (!JScriptRender.hasOwnProperty('jquery'))
 JScriptRender.jquery.Debug = function() 
 {
    // API's
-   JScriptRender.jquery.Debug.UI = new $j.jquery.UI();
+   JScriptRender.jquery.Debug.UI = new $jS.jquery.UI();
 };
 
 JScriptRender.jquery.Debug.prototype = 
