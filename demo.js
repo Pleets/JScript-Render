@@ -138,4 +138,12 @@ $jS.ready(function(){
 
    _files.addDropEvent();
    _files.addChangeEvent();
+
+
+   var dateControl = new $jS.utils.DateControl("#dateControlYear", "#dateControlMonth", false);
+
+   document.querySelector("#dateControlYear").addEventListener('change', function(){
+      dateControl.render();
+   });
+
 });

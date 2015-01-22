@@ -5,7 +5,7 @@
  * Free to use under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
  *
- * Date: 2014-08-03
+ * Date: 2015-01-22
  */
 
 /* JScriptRender alias */
@@ -166,7 +166,7 @@ $jS.array_include([
 
     // Exceptions
     'exception/Exception.js',
-    
+
     // Readers
     'readers/File.js',
 
@@ -178,6 +178,13 @@ $jS.array_include([
 
     // Utils
     'utils/DateControl.js',
+
+    // Languages
+    'language/en_US.js',
+    'language/es_ES.js',
+
+    // General settings
+    'settings/general.js',
 
 ], function(){
     JScriptRender.STATE = 'complete';

@@ -20,7 +20,7 @@ JScriptRender.utils.DateControl = function(yearSelector, monthSelector, inclusiv
    
    this.yearSelector = yearSelector;
    this.monthSelector = monthSelector;
-   this.inclusive = (inclusive !== undefined) ? inclusive : true;
+   this.inclusive = (inclusive !== undefined) ? inclusive : true;    /* include actual month */
 }
 
 JScriptRender.utils.DateControl.prototype = 
@@ -44,19 +44,18 @@ JScriptRender.utils.DateControl.prototype =
 
       var yearSelected = document.querySelector(this.yearSelector).value;
 
-      var num_months;
-
       var date = new Date();
       var year = date.getFullYear();
 
-      num_months = (yearSelected < year) ? 12 : date.getMonth();
+      var num_months = (yearSelected < year) ? 12 : date.getMonth() + 1;
 
-      if (!this.inclusive && yearSelected < year)
+      if (!this.inclusive && yearSelected == year)
          num_months--;
 
-      var months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+      var language = JScriptRender.settings.general.language;
+      var months = JScriptRender.language[language].months;
 
-      for (var i = num_months; i > 0; i-- ) 
+      for (var i = num_months; i > 0; i--)
       {
          var opt = document.createElement('option');
          opt.value = i;
