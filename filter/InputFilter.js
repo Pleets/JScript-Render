@@ -22,14 +22,14 @@ JScriptRender.filter.InputFilter = function (form)
    JScriptRender.filter.InputFilter.prototype.filters = {};
 
    // API's
-   JScriptRender.filter.InputFilter.prototype.validator = API.Validator;
+   JScriptRender.filter.InputFilter.prototype.validator = JScriptRender.validator;
 }
 
 JScriptRender.filter.InputFilter.prototype = 
 {
    add: function(inputFilter)
    {
-      if (!object.hasOwnProperty('name'))
+      if (!inputFilter.hasOwnProperty('name'))
          throw "The element must be named";
 
       if (typeof inputFilter !== "object")

@@ -140,10 +140,34 @@ $jS.ready(function(){
    _files.addChangeEvent();
 
 
-   var dateControl = new $jS.utils.DateControl("#dateControlYear", "#dateControlMonth", false);
+   var dateControl = new $jS.utils.DateControl("#dateControlYear", "#dateControlMonth", true);
 
    document.querySelector("#dateControlYear").addEventListener('change', function(){
       dateControl.render();
+   });
+
+
+   var form = new JScriptRender.html.FormValidator();
+   form.render("#processForm", {
+         validators: {
+            'number_form_process': {
+               "StringLength": { "min": 2, "max": 5 },
+               "Digits": {},
+            },
+            'alnum_form_process': {
+               "StringLength": { "min": 4, "max": 8 },
+               "Alnum": { 'allowWhiteSpace' : false },
+            }
+         },
+         onValid: function(elements)
+         {
+            alert('success');
+         },
+         onInvalid: function(elements)
+         {
+            alert('invalid');
+         },
+         highlight: { onValid: 'input-success', onInvalid: 'input-error'}
    });
 
 });

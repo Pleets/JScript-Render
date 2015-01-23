@@ -158,11 +158,11 @@ $jS.array_include([
     'filter/InputFilter.js',
 
     // Html
-    'html/Html.js',
     'html/Overlay.js',
     'html/Loader.js',
     'html/Dialog.js',
     'html/Form.js',
+    'html/FormValidator.js',
 
     // Exceptions
     'exception/Exception.js',
