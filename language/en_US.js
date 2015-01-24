@@ -28,4 +28,7 @@ JScriptRender.language.en_US =
    // StringLength
    stringLengthTooShort: function(min){ return "The input is less than " + min + " characters long" },
    stringLengthTooLong: function(max){ return "The input is more than " + max + " characters long" },
+
+   // Digits
+   notDigits: "The input must contain only digits",
 }

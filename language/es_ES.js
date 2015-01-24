@@ -27,5 +27,8 @@ JScriptRender.language.es_ES =
 
    // StringLength
    stringLengthTooShort: function(min){ return "La entrada contiene menos de " + min + " caracteres" },
-   stringLengthTooLong: function(max){ return "La entrada contiene más de " + max + " caracteres" },   
+   stringLengthTooLong: function(max){ return "La entrada contiene más de " + max + " caracteres" },
+
+   // Digits
+   notDigits: "La entrada debe contener sólo dígitos",
 }

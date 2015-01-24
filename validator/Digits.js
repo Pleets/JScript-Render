@@ -20,6 +20,9 @@ JScriptRender.validator.Digits = function() {
 
    this.messages = {};
 
+   /* Get language */
+   var language = JScriptRender.settings.general.language;
+   this.languageHelper = JScriptRender.language[language];
 };
 
 JScriptRender.validator.Digits.prototype =
@@ -33,7 +36,7 @@ JScriptRender.validator.Digits.prototype =
 
       if (!(string.match(RegExpr)))
       {
-         this.messages.notDigits = "The input must contain only digits";
+         this.messages.notDigits = this.languageHelper.notDigits;
          return false;
       }
 
