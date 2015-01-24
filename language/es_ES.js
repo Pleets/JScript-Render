@@ -33,5 +33,8 @@ JScriptRender.language.es_ES =
    notDigits: "La entrada debe contener sólo dígitos",
 
    // Alnum
-   notAlnum: "La entrada contiene caracteres que no son alfabéticos o dígitos"   
+   notAlnum: "La entrada contiene caracteres que no son alfabéticos o dígitos",
+
+   // FileFormat
+   invalidFileFormat: function(format) { return "El formato del archivo es inválido!, el formato actual es " + format }
 }
