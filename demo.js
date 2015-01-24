@@ -147,29 +147,34 @@ $jS.ready(function(){
    });
 
 
-   var form = new JScriptRender.html.FormValidator();
-   form.render("#processForm", {
-         validators: {
-            'number_form_process': {
-               "StringLength": { "min": 2, "max": 5 },
-               "Digits": {},
-            },
-            'alnum_form_process': {
-               "StringLength": { "min": 4, "max": 8 },
-               "Alnum": { 'allowWhiteSpace' : false },
-            }
+   var form = new JScriptRender.html.FormValidator("#processForm", {
+      validators: {
+         'number_form_process': {
+            "StringLength": { "min": 2, "max": 5 },
+            "Digits": {},
          },
-         onValid: function(elements)
-         {
-            alert('success');
-         },
-         onInvalid: function(messages)
-         {
-            console.info(messages)
-            alert('invalid');
-         },
-         highlight: { onValid: 'input-success', onInvalid: 'input-error'},
-         showMessages: true
+         'alnum_form_process': {
+            "StringLength": { "min": 4, "max": 8 },
+            "Alnum": { 'allowWhiteSpace' : false },
+         }
+      },
+      onValid: function(elements)
+      {
+         alert('success');
+      },
+      onInvalid: function(messages)
+      {
+         console.info(messages)
+         alert('invalid');
+      },
+      highlight: { onValid: 'input-success', onInvalid: 'input-error'},
+      showMessages: true
    });
+
+   document.querySelector("#processForm").addEventListener("submit", function(event){
+      event.preventDefault();
+      form.render();      
+   });
+
 
 });
