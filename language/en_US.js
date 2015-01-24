@@ -17,5 +17,15 @@ if (!JScriptRender.hasOwnProperty('language'))
 
 JScriptRender.language.en_US = 
 {
-   months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+   months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+
+   /* Standard validation classes */
+
+   // Date
+   dateInvalidDate: "The input does not appear to be a valid date",
+   dateFalseFormat: "The input does not fit the date format 'Y-m-d'",
+
+   // StringLength
+   stringLengthTooShort: function(min){ return "The input is less than " + min + " characters long" },
+   stringLengthTooLong: function(max){ return "The input is more than " + max + " characters long" },
 }

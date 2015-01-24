@@ -76,3 +76,9 @@ button[class~="jButton"]
     margin: 2px; padding: 5px;
     border: solid 1px rgb(235,235,235);
 }
+
+*[data-log] > span
+{
+  color: red;
+  display: block;
+}

@@ -146,6 +146,13 @@ for (var f in $jS.StdClass) {
 
 $jS.array_include([
 
+    // Languages
+    'language/en_US.js',
+    'language/es_ES.js',
+
+    // General settings
+    'settings/general.js',
+
     // Validators
     'validator/MathExpression.js',
     'validator/StringLength.js',
@@ -178,13 +185,6 @@ $jS.array_include([
 
     // Utils
     'utils/DateControl.js',
-
-    // Languages
-    'language/en_US.js',
-    'language/es_ES.js',
-
-    // General settings
-    'settings/general.js',
 
 ], function(){
     JScriptRender.STATE = 'complete';

@@ -36,6 +36,10 @@ JScriptRender.validator.StringLength = function(settings)
 
    this.min = set.min;
    this.max = set.max;
+
+   /* Get language */
+   var language = JScriptRender.settings.general.language;
+   this.languageHelper = JScriptRender.language[language];
 }
 
 JScriptRender.validator.StringLength.prototype =
@@ -60,19 +64,19 @@ JScriptRender.validator.StringLength.prototype =
          {
             if (string.length < this.min)
             {
-               this.messages.stringLengthTooShort = "The input is less than " + this.min + " characters long";
+               this.messages.stringLengthTooShort = this.languageHelper.stringLengthTooShort(this.min);
                return false;
             }
             else if (string.length > this.max)
             {
-               this.messages.stringLengthTooLong = "The input is more than " + this.max + " characters long";
+               this.messages.stringLengthTooLong = this.languageHelper.stringLengthTooLong(this.max);
                return false;
             }
          }
          else {
             if (string.length < this.min)
             {
-               this.messages.stringLengthTooShort = "The input is less than " + this.min + " characters long";
+               this.messages.stringLengthTooShort = this.languageHelper.stringLengthTooShort(this.min);
                return false;   
             }
          }
@@ -82,19 +86,19 @@ JScriptRender.validator.StringLength.prototype =
          {
             if (string.trim().length < this.min)
             {
-              this.messages.stringLengthTooShort= "The input is less than " + this.min + " characters long";
+              this.messages.stringLengthTooShort = this.languageHelper.stringLengthTooShort(this.min);
               return false;
             }
             else if (string.trim().length > this.max)
             {
-              this.messages.stringLengthTooLong = "The input is more than " + this.max + " characters long";
+              this.messages.stringLengthTooLong = this.languageHelper.stringLengthTooLong(this.max);
               return false;
             }
          }
          else {
             if (string.trim().length < this.min)
             {
-              this.messages.stringLengthTooShort = "The input is less than " + this.min + " characters long";
+              this.messages.stringLengthTooShort = this.languageHelper.stringLengthTooShort(this.min);
               return false;
             }
          }
