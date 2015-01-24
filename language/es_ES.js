@@ -36,5 +36,8 @@ JScriptRender.language.es_ES =
    notAlnum: "La entrada contiene caracteres que no son alfabéticos o dígitos",
 
    // FileFormat
-   invalidFileFormat: function(format) { return "El formato del archivo es inválido!, el formato actual es " + format }
+   invalidFileFormat: function(format) { return "El formato del archivo es inválido!, el formato actual es " + format },
+
+   // MathExpression
+   malformedMathExpression: "Expresión mal formada"   
 }

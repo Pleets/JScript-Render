@@ -36,5 +36,8 @@ JScriptRender.language.en_US =
    notAlnum: "The input contains characters which are non alphabetic and no digits",
 
    // FileFormat
-   invalidFileFormat: function(format) { return "The file format is invalid!, the current file format is " + format }
+   invalidFileFormat: function(format) { return "The file format is invalid!, the current file format is " + format },
+
+   // MathExpression
+   malformedMathExpression: "Malformed expression"
 }
