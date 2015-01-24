@@ -143,49 +143,53 @@ for (var f in $jS.StdClass) {
 };
 
 /* Load classes */
+try {
+    $jS.array_include([
 
-$jS.array_include([
+        // Languages
+        'language/en_US.js',
+        'language/es_ES.js',
 
-    // Languages
-    'language/en_US.js',
-    'language/es_ES.js',
+        // General settings
+        'settings/general.js',
 
-    // General settings
-    'settings/general.js',
+        // Validators
+        'validator/MathExpression.js',
+        'validator/StringLength.js',
+        'validator/Digits.js',
+        'validator/Alnum.js',
+        'validator/Date.js',
+        'validator/FileFormat.js',
 
-    // Validators
-    'validator/MathExpression.js',
-    'validator/StringLength.js',
-    'validator/Digits.js',
-    'validator/Alnum.js',
-    'validator/Date.js',
-    'validator/FileFormat.js',
+        // Filters
+        'filter/InputFilter.js',
 
-    // Filters
-    'filter/InputFilter.js',
+        // Html
+        'html/Overlay.js',
+        'html/Loader.js',
+        'html/Dialog.js',
+        'html/Form.js',
+        'html/FormValidator.js',
 
-    // Html
-    'html/Overlay.js',
-    'html/Loader.js',
-    'html/Dialog.js',
-    'html/Form.js',
-    'html/FormValidator.js',
+        // Exceptions
+        'exception/Exception.js',
 
-    // Exceptions
-    'exception/Exception.js',
+        // Readers
+        'readers/File.js',
 
-    // Readers
-    'readers/File.js',
+        // jQuery utils
+        'jquery/Ajax.js',
+        'jquery/UI.js',
+        'jquery/Debug.js',
+        'jquery/Animation.js',
 
-    // jQuery utils
-    'jquery/Ajax.js',
-    'jquery/UI.js',
-    'jquery/Debug.js',
-    'jquery/Animation.js',
+        // Utils
+        'utils/DateControl.js',
 
-    // Utils
-    'utils/DateControl.js',
-
-], function(){
-    JScriptRender.STATE = 'complete';
-});
+    ], function(){
+        JScriptRender.STATE = 'complete';
+    });    
+}
+catch (e) {
+    JScriptRender.STATE = 'error';
+}
