@@ -31,6 +31,8 @@ JScriptRender.html.FormValidator.prototype =
         set.highlight.onValid = set.highlight.onValid || "";
         set.highlight.onInvalid = set.highlight.onInvalid || "";
 
+        set.showMessages = (set.showMessages !== undefined) ? set.showMessages : true;
+
         set.id = set.id || "dialog-ui";
 
         // Callbacks
@@ -75,6 +77,15 @@ JScriptRender.html.FormValidator.prototype =
                             classString += " " +classes[j];
                     };
                     validInputs[i].className = classString;
+
+                    var logMessagesBox = document.querySelector(InputFilter.scope + ' [data-log=\'' + validInputs[i].name + '\']');
+
+                    if (logMessagesBox != null)
+                    {
+                        while (logMessagesBox.firstChild) {
+                            logMessagesBox.removeChild(logMessagesBox.firstChild);
+                        }              
+                    }                    
                 };
 
                 // [BUG] - Missing support for onValid class
@@ -87,7 +98,31 @@ JScriptRender.html.FormValidator.prototype =
                         if (i == 0)
                             invalidInputs[i].focus();
                     };
-                    return set.onInvalid(invalidInputs);
+
+                    if (set.showMessages)
+                    {
+                        var messages = InputFilter.getMessages();
+
+                        for (var item in messages)
+                        {
+                            var element = document.querySelector(InputFilter.scope + ' [name=\'' + item + '\']');
+                            var logMessagesBox = document.querySelector(InputFilter.scope + ' [data-log=\'' + item + '\']');
+                            var elementMessages = messages[item];
+
+                            for (var msg in elementMessages)
+                            {
+                                var span = document.createElement('span');
+                                var text = elementMessages[msg];
+                                var textNode = document.createTextNode(text);
+                                span.appendChild(textNode);
+
+                                if (logMessagesBox != null)
+                                    logMessagesBox.appendChild(span);
+                            }
+                        }
+                    }
+
+                    return set.onInvalid(InputFilter.getMessages());
                 }
                 else
                     set.onValid(InputFilter.getInputs());

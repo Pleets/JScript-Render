@@ -163,11 +163,13 @@ $jS.ready(function(){
          {
             alert('success');
          },
-         onInvalid: function(elements)
+         onInvalid: function(messages)
          {
+            console.info(messages)
             alert('invalid');
          },
-         highlight: { onValid: 'input-success', onInvalid: 'input-error'}
+         highlight: { onValid: 'input-success', onInvalid: 'input-error'},
+         showMessages: true
    });
 
 });

@@ -152,11 +152,16 @@
 
    
     <form action="" id="processForm">
-      <label for="number_form_process">String length. Min 2, Max 5 and Digits</label><br />
-      <input class="jInput" type="text" name='number_form_process' /><br /><br />
-      <label for="alnum_form_process">String length. Min 4, Max 8 and Alnum without <em>allowWhiteSpace</em></label><br />
-      <input class="jInput" type="text" name='alnum_form_process' /><br /><br />
-      
+      <div>
+        <label for="number_form_process">String length. Min 2, Max 5 and Digits</label><br />
+        <input class="jInput" type="text" name='number_form_process' />
+        <div data-log='number_form_process'></div>
+      </div>
+      <div>
+        <label for="alnum_form_process">String length. Min 4, Max 8 and Alnum without <em>allowWhiteSpace</em></label><br />
+        <input class="jInput" type="text" name='alnum_form_process' />
+        <div data-log='alnum_form_process'></div>  
+      </div>
       <button class="jButton" id='html'>Send</button>
     </form>
 

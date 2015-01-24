@@ -16,12 +16,14 @@ if (!JScriptRender.hasOwnProperty('validator'))
    JScriptRender.validator = new Object();
 
 /* Digits class */
-JScriptRender.validator.Digits = new Function();
+JScriptRender.validator.Digits = function() {
+
+   this.messages = {};
+
+};
 
 JScriptRender.validator.Digits.prototype =
 {
-   Messages: {},
-
    isValid: function(string)
    {
       // Remove whitespaces
@@ -31,7 +33,7 @@ JScriptRender.validator.Digits.prototype =
 
       if (!(string.match(RegExpr)))
       {
-         this.Messages.notDigits = "The input must contain only digits";
+         this.messages.notDigits = "The input must contain only digits";
          return false;
       }
 
@@ -39,6 +41,6 @@ JScriptRender.validator.Digits.prototype =
    },
    getMessages: function()
    {
-      return this.Messages;
+      return this.messages;
    }     
 }

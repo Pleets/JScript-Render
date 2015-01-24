@@ -18,7 +18,10 @@ if (!JScriptRender.hasOwnProperty('validator'))
 /* StringLength class */
 JScriptRender.validator.StringLength = function(settings)
 {
+   this.messages = {};
+
    var set = settings || {};
+
 
    if (typeof set.min !== "number")
       throw ("The minimun value must be number type");
@@ -37,8 +40,6 @@ JScriptRender.validator.StringLength = function(settings)
 
 JScriptRender.validator.StringLength.prototype =
 {
-   Messages: {},
-
    isValid: function(string, whitespaces) 
    {
       // Allow whitespaces
@@ -51,7 +52,7 @@ JScriptRender.validator.StringLength.prototype =
       if (typeof whitespaces !== "boolean")
          throw "The second argument must be boolean type!";
 
-      this.Messages = {};
+      this.messages = {};
 
       if (whitespaces)
       {
@@ -59,19 +60,19 @@ JScriptRender.validator.StringLength.prototype =
          {
             if (string.length < this.min)
             {
-               this.Messages.stringLengthTooShort = "The input is less than " + this.min + " characters long";
+               this.messages.stringLengthTooShort = "The input is less than " + this.min + " characters long";
                return false;
             }
             else if (string.length > this.max)
             {
-               this.Messages.stringLengthTooLong = "The input is more than " + this.max + " characters long";
+               this.messages.stringLengthTooLong = "The input is more than " + this.max + " characters long";
                return false;
             }
          }
          else {
             if (string.length < this.min)
             {
-               this.Messages.stringLengthTooShort = "The input is less than " + this.min + " characters long";
+               this.messages.stringLengthTooShort = "The input is less than " + this.min + " characters long";
                return false;   
             }
          }
@@ -81,19 +82,19 @@ JScriptRender.validator.StringLength.prototype =
          {
             if (string.trim().length < this.min)
             {
-              this.Messages.stringLengthTooShort= "The input is less than " + this.min + " characters long";
+              this.messages.stringLengthTooShort= "The input is less than " + this.min + " characters long";
               return false;
             }
             else if (string.trim().length > this.max)
             {
-              this.Messages.stringLengthTooLong = "The input is more than " + this.max + " characters long";
+              this.messages.stringLengthTooLong = "The input is more than " + this.max + " characters long";
               return false;
             }
          }
          else {
             if (string.trim().length < this.min)
             {
-              this.Messages.stringLengthTooShort = "The input is less than " + this.min + " characters long";
+              this.messages.stringLengthTooShort = "The input is less than " + this.min + " characters long";
               return false;
             }
          }
@@ -102,6 +103,6 @@ JScriptRender.validator.StringLength.prototype =
    },
    getMessages: function()
    {
-      return this.Messages;
+      return this.messages;
    }
 }

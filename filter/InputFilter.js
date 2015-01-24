@@ -18,15 +18,21 @@ if (!JScriptRender.hasOwnProperty('filter'))
 /* InputFilter class */
 JScriptRender.filter.InputFilter = function (form)
 {
-   JScriptRender.filter.InputFilter.prototype.scope = (typeof form !== "undefined") ? form : "";
-   JScriptRender.filter.InputFilter.prototype.filters = {};
+   this.scope = (typeof form !== "undefined") ? form : "";
+   this.filters = {};
+
+   this.messages = {};
 
    // API's
-   JScriptRender.filter.InputFilter.prototype.validator = JScriptRender.validator;
+   this.validator = JScriptRender.validator;
 }
 
 JScriptRender.filter.InputFilter.prototype = 
 {
+   getMessages: function()
+   {
+      return this.messages;
+   },
    add: function(inputFilter)
    {
       if (!inputFilter.hasOwnProperty('name'))
@@ -74,8 +80,20 @@ JScriptRender.filter.InputFilter.prototype =
             var validatorInstance = new this.validator[validator](this.filters[input].validators[validator]);
             if (inputElement == null)
                throw 'Input not Found: ' + this.scope + ' [name=\'' + this.filters[input].name + '\']';
-            else if (!validatorInstance.isValid(inputElement.value))
+            else if (!validatorInstance.isValid(inputElement.value)) 
+            {
                inputs.push(inputElement);
+
+               /* No Overwrite messages */
+               if (!this.messages.hasOwnProperty(this.filters[input].name))
+                  this.messages[this.filters[input].name] = {};
+
+               var messages = validatorInstance.getMessages();
+
+               for (var item in messages) {
+                  this.messages[this.filters[input].name][item] = messages[item];
+               };
+            }
          }
       }
       return inputs;
