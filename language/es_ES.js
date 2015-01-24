@@ -31,4 +31,7 @@ JScriptRender.language.es_ES =
 
    // Digits
    notDigits: "La entrada debe contener sólo dígitos",
+
+   // Alnum
+   notAlnum: "La entrada contiene caracteres que no son alfabéticos o dígitos"   
 }

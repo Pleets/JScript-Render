@@ -31,4 +31,7 @@ JScriptRender.language.en_US =
 
    // Digits
    notDigits: "The input must contain only digits",
+
+   // Alnum
+   notAlnum: "The input contains characters which are non alphabetic and no digits"
 }
