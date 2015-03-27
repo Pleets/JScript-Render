@@ -122,8 +122,10 @@ $jS.ready(function(){
 
    form.setData({ username: 'George', password: '123456' });
 
+   var myForm = form.getForm();
+
    document.querySelector("#createForm").addEventListener('click', function(){
-      document.querySelector("#formArea").appendChild(form.getForm());
+      document.querySelector("#formArea").appendChild(myForm);
    });
 
    /* File reader */
