@@ -15,7 +15,7 @@ if (!window.hasOwnProperty('JScriptRender'))
 	JScriptRender = {};
 
 /* Namespace */
-if (!JScriptRender.hasOwnProperty('ajax'))
+if (!JScriptRender.hasOwnProperty('jquery'))
 	JScriptRender.jquery = new Object();
 
 /* Comet class */
