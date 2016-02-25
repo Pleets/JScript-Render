@@ -5,7 +5,7 @@
  * Free to use under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
  *
- * Date: 2015-01-22
+ * Date: 2016-02-25
  */
 
 /* JScriptRender alias */
@@ -182,13 +182,14 @@ try {
         'jquery/UI.js',
         'jquery/Debug.js',
         'jquery/Animation.js',
+        'jquery/Comet.js',
 
         // Utils
-        'utils/DateControl.js',
+        'utils/DateControl.js'
 
     ], function(){
         JScriptRender.STATE = 'complete';
-    });    
+    });
 }
 catch (e) {
     JScriptRender.STATE = 'error';
