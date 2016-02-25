@@ -183,7 +183,7 @@ JScriptRender.jquery.UI.prototype =
                 dialog.append(set.content);
 
             dialog.dialog({
-                overlay: set.overlay,
+                modal: set.overlay,
                 width: set.width,
                 height: set.height,
                 autoOpen: set.autoOpen,
