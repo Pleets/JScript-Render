@@ -166,7 +166,7 @@ JScriptRender.jquery.UI.prototype =
         set.draggable = (set.draggable !== undefined) ? set.draggable : true;
         set.resizable = (set.resizable !== undefined) ? set.resizable : true;
 
-        set.buttons = set.buttons || true;
+        set.buttons = set.buttons || {};
 
         if ($("#"+set.id).length && set.persistence)
             $("#"+set.id).dialog("open");
