@@ -73,7 +73,7 @@ JScriptRender.jquery.Comet.prototype =
 
       if (this.timestamp == -1)
           return this.disconnect();
-      else if (this.timestamp.trim() == "")
+      else if (String(this.timestamp).trim() == "")
       {
           this.disconnect();
           console.info("Disconnected for empty timestamp");
