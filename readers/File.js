@@ -70,7 +70,7 @@ JScriptRender.reader.File.prototype =
 
          if (this.filter != null) {
            if (!this.filter.isValid(files[i]))
-               throw ('Invalid file format ' + files[i].type + ' of ' + files[i].name);      
+               throw ('Invalid file format ' + files[i].type + ' of ' + files[i].name);
          }
 
          // Test file size
@@ -132,7 +132,7 @@ JScriptRender.reader.File.prototype =
          preview(formData[i]);
       };
    },
-   upload: function(files, callback) 
+   upload: function(files, callback)
    {
       var xhr = new XMLHttpRequest();
       xhr.open('POST', this.url);
@@ -153,7 +153,7 @@ JScriptRender.reader.File.prototype =
 
       xhr.onreadystatechange = function()
       {
-         if (xhr.readyState == 4 && xhr.status == 200) 
+         if (xhr.readyState == 4 && xhr.status == 200)
          {
             //that.previewBox.innerHTML += xhr.responseText;
             document.querySelector("#JScriptRender-file-progress").parentNode.removeChild(document.querySelector("#JScriptRender-file-progress"));
@@ -166,7 +166,7 @@ JScriptRender.reader.File.prototype =
 
       xhr.upload.onprogress = function(event)
       {
-         progress.value = (event.loaded / event.total * 100);
+         progress.value = event.loaded / event.total;
       };
 
       xhr.send(files);
@@ -214,7 +214,7 @@ JScriptRender.reader.File.prototype =
          }
          catch(e)
          {
-            var exception = new $j.exception.Exception(e);
+            var exception = new $jS.exception.Exception(e);
             exception.print();
          }
 

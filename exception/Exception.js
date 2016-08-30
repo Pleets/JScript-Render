@@ -19,19 +19,19 @@ if (!JScriptRender.hasOwnProperty('exception'))
    JScriptRender.exception = new Object();
 
 /* Exception class */
-JScriptRender.exception.Exception = function(name, message) 
+JScriptRender.exception.Exception = function(name, message)
 {
     JScriptRender.exception.Exception.prototype.name = name;
     JScriptRender.exception.Exception.prototype.message = message;
 };
 
-JScriptRender.exception.Exception.prototype = 
+JScriptRender.exception.Exception.prototype =
 {
-    print: function(e, settings) 
+    print: function(e, settings)
     {
         var set = settings || {};
 
-        if (typeof e == "undefined") 
+        if (typeof e == "undefined")
         {
             if (typeof this.message == "undefined")
                 e = {
@@ -48,13 +48,13 @@ JScriptRender.exception.Exception.prototype =
         // Dialog parameters
         set.width = set.width || 300;
 
-        var d = new $j.html.Dialog({ title: e.name, content: e.message, width: set.width });
+        var d = new $jS.html.Dialog({ title: e.name, content: e.message, width: set.width });
         d.show();
     },
     parse: function(name, message)
     {
         this.name = name;
         this.message = message;
-        return this;            
+        return this;
     }
 }
