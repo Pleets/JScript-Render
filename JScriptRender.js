@@ -1,36 +1,82 @@
-/*
- * JScript Render - Javascript renderization tools
- * http://www.pleets.org
- * Copyright 2014, Pleets Apps
- * Free to use under the MIT license.
- * http://www.opensource.org/licenses/mit-license.php
+/**
+ * JScriptRender (http://www.jscriptrender.com)
  *
- * Date: 2016-02-25
+ * @link      http://github.com/Pleets/JScript-Render
+ * @copyright Copyright (c) 2014-2017 Pleets. (http://www.pleets.org)
+ * @license   http://www.jscriptrender.com/license
  */
 
-/* JScriptRender alias */
+/* JScriptRender object */
 if (!window.hasOwnProperty('JScriptRender'))
     JScriptRender = {};
 
-/* relative path to the element whose script is currently being processed.*/
-if (typeof document.currentScript != "undefined" && document.currentScript != null)
+/*
+ * Constructor
+ */
+JScriptRender = function()
 {
-    var str = document.currentScript.src;
-    JScriptRender.PATH = (str.lastIndexOf("/") == -1) ? "." : str.substring(0, str.lastIndexOf("/"));
-}
-else {
-    /* alternative method to get the currentScript (older browsers) */
-        // ...
-    /* else get the URL path */
-    JScriptRender.PATH = '.';
+    /* relative path to the element whose script is currently being processed.*/
+    if (typeof document.currentScript != "undefined" && document.currentScript != null)
+    {
+        var str = document.currentScript.src;
+        JScriptRender.PATH = (str.lastIndexOf("/") == -1) ? "." : str.substring(0, str.lastIndexOf("/"));
+    }
+    else {
+        /* alternative method to get the currentScript (older browsers) */
+            // ...
+    }
+
+    /**
+     * @var string
+     */
+    this.state = 'loading';
+
+    /**
+     * @var object
+     */
+    this.errors = {};
 }
 
-JScriptRender.STATE = 'loading';
+/**#@+
+ * Transaction constants
+ * @var string
+ */
+JScriptRender.NETWORK_ERROR  = 'networkError';
+JScriptRender.FILE_NOT_FOUND = 'fileNotFound';
 
-/* Standard class */
-JScriptRender.StdClass = 
+/**
+ * Validation failure message template definitions
+ *
+ * @var object
+ */
+JScriptRender.messagesTemplates = {
+    [JScriptRender.NETWORK_ERROR] : 'The resource \'%url%\' hasn\'t been loaded',
+    [JScriptRender.FILE_NOT_FOUND]: 'The resource \'%url%\' not found'
+}
+
+JScriptRender.prototype =
 {
-    include: function(url, ajax, callback) 
+    PATH: '.',
+
+    /**
+     * Adds an error
+     *
+     * @param string           $code
+     * @param string|undefined $message
+     *
+     * @return null
+     */
+    error: function(code, message)
+    {
+        if (!(this.errors.code !== undefined))
+            this.errors[code] = (JScriptRender.messagesTemplates[code] !== undefined)
+                ?
+                    (message == undefined)
+                        ? JScriptRender.messagesTemplates[code]
+                        : JScriptRender.messagesTemplates[code].replace(/%[a-zA-Z]*%/, message)
+                : message;
+    },
+    include: function(url, ajax, callback)
     {
         callback = callback || new Function();
 
@@ -47,18 +93,20 @@ JScriptRender.StdClass =
             /* IE */
             if (script.readyState)
             {
-                script.onreadystatechange = function() 
+                script.onreadystatechange = function()
                 {
-                    if (this.readyState == 'complete') {
+                    if (this.readyState == 'complete')
+                    {
                         var scriptTag = document.querySelector('#' + script.id);
                         scriptTag.parentNode.removeChild(scriptTag);
                         callback();
                     }
-                }                
+                }
             }
             /* Others */
             else {
-                script.onload = function() {
+                script.onload = function()
+                {
                     var scriptTag = document.querySelector('#' + script.id);
                     scriptTag.parentNode.removeChild(scriptTag);
                     callback();
@@ -68,7 +116,8 @@ JScriptRender.StdClass =
             var head = document.querySelector('head');
             head.appendChild(script);
         }
-        else {
+        else
+        {
             var xhr = new XMLHttpRequest();
             // To prevent 412 (Precondition Failed) use GET method instead of POST
             // Set async to false to can use xhr.status after xhr.send()
@@ -78,22 +127,32 @@ JScriptRender.StdClass =
             {
                 if (xhr.readyState == 4 && xhr.status == 200)
                     eval(xhr.responseText);
-                if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 404)) {
-                    callback();   
-                }
+                if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 404))
+                    callback();
             }
 
-            xhr.send();
+            try {
+                xhr.send();
+            }
+            catch (e)
+            {
+                this.error(JScriptRender.NETWORK_ERROR, url);
+                return false;
+            }
 
             if (xhr.status == 404)
+            {
+                this.error(JScriptRender.FILE_NOT_FOUND, url);
                 return false;
+            }
         }
+
         return true;
     },
     require: function(url, callback)
     {
         if (!this.include(url, true, callback))
-            alert('The resource ' + url + ' probably does not exists');
+            this.error(JScriptRender.NETWORK_ERROR, url);
     },
     array_include: function(urlArray, callback)
     {
@@ -103,10 +162,13 @@ JScriptRender.StdClass =
         callback = callback || new Function();
 
         if (urlArray.length > 0)
+        {
             this.include(resource, false, function(){
                 urlArray = urlArray.splice(1, urlArray.length);
                 that.array_include(urlArray, callback);
             });
+        }
+
         else
             callback();
     },
@@ -114,10 +176,12 @@ JScriptRender.StdClass =
     {
         handler = handler || new Function();
 
-        var libReady = function(handler) 
+        var that = this;
+
+        var libReady = function(handler)
         {
             setTimeout(function(){
-                if (JScriptRender.STATE == "complete")
+                if (that.state == "complete")
                     handler();
                 else
                     return libReady(handler);
@@ -127,7 +191,8 @@ JScriptRender.StdClass =
         if (document.readyState == "complete")
             libReady(handler);
         else {
-            document.onreadystatechange = function () {
+            document.onreadystatechange = function ()
+            {
                 if (document.readyState == "complete") {
                     libReady(handler);
                 }
@@ -137,13 +202,11 @@ JScriptRender.StdClass =
 }
 
 /* Short alias */
-var $jS = JScriptRender;
-for (var f in $jS.StdClass) {
-    $jS[f] = $jS.StdClass[f];
-};
+var $jS = new JScriptRender();
 
-/* Load classes */
+/* autoloader */
 try {
+
     $jS.array_include([
 
         // Languages
@@ -188,9 +251,10 @@ try {
         'utils/DateControl.js'
 
     ], function(){
-        JScriptRender.STATE = 'complete';
+        $jS.state = 'complete';
     });
 }
-catch (e) {
-    JScriptRender.STATE = 'error';
+catch (e)
+{
+    $jS.state = 'error';
 }

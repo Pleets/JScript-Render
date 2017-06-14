@@ -1,16 +1,16 @@
 $jS.ready(function(){
 
    /* Validators */
-   var Validator = $jS.validator;
+   var Validator = JScriptRender.validator;
 
    var Alnum = new Validator.Alnum();
    var StringLength = new Validator.StringLength({ min: 3, max: 8 });
    var _Date = new Validator.Date();
    var Digits = new Validator.Digits();
 
-   var Html = $jS.html;
+   var Html = JScriptRender.html;
 
-   function logValidator(validator, input, event, successMessage, boxMessage) 
+   function logValidator(validator, input, event, successMessage, boxMessage)
    {
       document.querySelector(input).addEventListener(event, function(){
          if (validator.isValid(document.querySelector(input).value))
@@ -36,7 +36,7 @@ $jS.ready(function(){
    logValidator(MathExpression, "#mathexpression_3", 'keyup', "Valid expression ... OK", "#mathexpression_validator_response_3");
 
    document.querySelector("#overlay-demo").addEventListener("click", function(){
-      var overlay = new $jS.html.Overlay();
+      var overlay = new JScriptRender.html.Overlay();
       overlay.show();
       setTimeout(function(){ overlay.hide(); },1000);
    });
@@ -44,7 +44,7 @@ $jS.ready(function(){
    /* Body loader */
 
    document.querySelector("#body-loader").addEventListener("click", function(){
-      var loader = new $jS.html.Loader();
+      var loader = new JScriptRender.html.Loader();
       loader.show();
       setTimeout(function(){ loader.hide(); },1000);
    });
@@ -54,7 +54,7 @@ $jS.ready(function(){
    var ctx1 = document.querySelector("#context-loader-1");
 
    var context1 = ctx1.getAttribute("data-context");
-   var loader1 = new $jS.html.Loader({ context: document.querySelector("#" + context1) });
+   var loader1 = new JScriptRender.html.Loader({ context: document.querySelector("#" + context1) });
 
    ctx1.addEventListener("click", function(){
    	if (loader1.isActive())
@@ -66,7 +66,7 @@ $jS.ready(function(){
    var ctx2 = document.querySelector("#context-loader-2");
 
    var context2 = ctx2.getAttribute("data-context");
-   var loader2 = new $jS.html.Loader({ context: document.querySelector("#" + context2), width: 150, height: 40 });
+   var loader2 = new JScriptRender.html.Loader({ context: document.querySelector("#" + context2), width: 150, height: 40 });
 
    ctx2.addEventListener("click", function(){
    	if (loader2.isActive())
@@ -89,7 +89,7 @@ $jS.ready(function(){
 
    /* Form */
 
-   var form = new $jS.html.Form();
+   var form = new JScriptRender.html.Form();
 
    form.add({
       name: "username",
@@ -130,7 +130,7 @@ $jS.ready(function(){
 
    /* File reader */
 
-   var Reader = $jS.reader;
+   var Reader = JScriptRender.reader;
 
    var _files = new Reader.File({
       fileBox: document.querySelector("#file-reader-onchange"),      // input[type='file']
@@ -142,7 +142,7 @@ $jS.ready(function(){
    _files.addChangeEvent();
 
 
-   var dateControl = new $jS.utils.DateControl("#dateControlYear", "#dateControlMonth", true);
+   var dateControl = new JScriptRender.utils.DateControl("#dateControlYear", "#dateControlMonth", true);
 
    document.querySelector("#dateControlYear").addEventListener('change', function(){
       dateControl.render();
@@ -175,8 +175,10 @@ $jS.ready(function(){
 
    document.querySelector("#processForm").addEventListener("submit", function(event){
       event.preventDefault();
-      form.render();      
+      form.render();
    });
 
+   /*var html = new JScriptRender.html.dom();
+   html.get('#table').toExcel();*/
 
 });
