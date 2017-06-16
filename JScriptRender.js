@@ -114,6 +114,14 @@ JScriptRender.prototype =
             }
 
             var head = document.querySelector('head');
+
+            var that = this;
+
+            script.onerror = function()
+            {
+                that.error(JScriptRender.NETWORK_ERROR, url);
+            }
+
             head.appendChild(script);
         }
         else
@@ -212,6 +220,9 @@ try {
         // Languages
         'language/en_US.js',
         'language/es_ES.js',
+
+        // php
+        'php/stdClass',
 
         // General settings
         'settings/general.js',
