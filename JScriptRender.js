@@ -222,7 +222,8 @@ try {
         'language/es_ES.js',
 
         // php
-        'php/stdClass',
+        'php/stdClass.js',
+        'utils/toExcel.js',
 
         // General settings
         'settings/general.js',

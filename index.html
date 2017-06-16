@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  
+
   <title>JScriptRender examples</title>
 
   <!-- JScriptRender -->
@@ -23,7 +23,7 @@
       <h1>Validators <small>standard validation classes</small></h1>
     </div>
 
-    <div class="page-header">    
+    <div class="page-header">
       <h3>Alnum</h3>
     </div>
 
@@ -31,15 +31,15 @@
     <input id="alnum" type="text" class="jInput" placeholder="alnum" />
     <span id="alnum_validator_response"></span>
 
-    <div class="page-header">    
+    <div class="page-header">
       <h3>StringLength</h3>
     </div>
-    
+
     <label for="stringLength">String length. Min 3, Max 8</label><br />
     <input id="stringLength" type="text" class="jInput" placeholder="string length" />
     <span id="stringLength_validator_response"></span>
 
-    <div class="page-header">    
+    <div class="page-header">
       <h3>Date</h3>
     </div>
 
@@ -47,7 +47,7 @@
     <input id="date" type="text" class="jInput" placeholder="yyyy-mm-dd" />
     <span id="date_validator_response"></span>
 
-    <div class="page-header">    
+    <div class="page-header">
       <h3>Digits</h3>
     </div>
 
@@ -55,7 +55,7 @@
     <input id="digits" type="text" class="jInput" placeholder="digits" />
     <span id="digits_validator_response"></span>
 
-    <div class="page-header">    
+    <div class="page-header">
       <h3>MathExpression</h3>
     </div>
 
@@ -84,7 +84,7 @@
       <h1>Utils <small>DOM</small></h1>
     </div>
 
-    <div class="page-header">    
+    <div class="page-header">
       <h3>DateControl</h3>
     </div>
 
@@ -113,13 +113,13 @@
       <h1>Html <small>DOM</small></h1>
     </div>
 
-    <div class="page-header">    
+    <div class="page-header">
       <h3>Overlay</h3>
     </div>
 
     <button class="jButton" id="overlay-demo">Overlay</button>
- 
-    <div class="page-header">    
+
+    <div class="page-header">
       <h3>Loader</h3>
     </div>
 
@@ -138,19 +138,19 @@
     <div class="panel-body" id="context-2">
       ...
     </div>
-    
+
     <h3>+ Popup</h3>
 
     <button id='dialog-example' class="jButton">Popup</button>
-   
+
     <h3>+ Form</h3>
 
     <button class="jButton" id='createForm'>Create Form</button>
     <div id='formArea'></div>
-  
+
     <h3>+ Html</h3>
 
-   
+
     <form action="" id="processForm">
       <div>
         <label for="number_form_process">String length. Min 2, Max 5 and Digits</label><br />
@@ -160,7 +160,7 @@
       <div>
         <label for="alnum_form_process">String length. Min 4, Max 8 and Alnum without <em>allowWhiteSpace</em></label><br />
         <input class="jInput" type="text" name='alnum_form_process' />
-        <div data-log='alnum_form_process'></div>  
+        <div data-log='alnum_form_process'></div>
       </div>
       <button class="jButton" id='html'>Send</button>
     </form>
@@ -180,8 +180,28 @@
     </div>
     <div id="file_reader_ondrop_response"></div>
 
+    <div class="page-header">
+      <h1>Exporting data <small>...</small></h1>
+    </div>
+
+    <table class="jTable" id="export-table">
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th>Country</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+        </tr>
+      </tbody>
+    </table><br />
+
+    <button onclick="JScriptRender.utils.toExcel(document.getElementById('export-table'))">Export</button>
+
   </div>
 
 </body>
 </html>
-
