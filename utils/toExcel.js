@@ -39,25 +39,32 @@ JScriptRender.utils.toExcel = function(node)
 
     var children  = node.children;
 
-    while (children !== undefined && children.length)
+    toIter = function(children)
     {
-        console.info('iteration');
         JScriptRender.php.array_walk(children, function(node){
-            /*console.info("element:");
-            console.info(node);*/
-            /*console.info("sadfsad");*/
 
-            node.setAttribute('style', node.getAttribute('style') + ';' + getCSS(node));
+            var styles = (node.getAttribute('style') == null) ? '' :  node.getAttribute('style') + ';';
+
+            node.setAttribute('style', styles + getCSS(node));
+            children = node.children;
+
+            if (children !== undefined && children.length)
+                toIter(children);
         });
-
-        children = children.children;
     }
 
+    if (children !== undefined && children.length)
+    {
+        var styles = (node.getAttribute('style') == null) ? '' :  node.getAttribute('style') + ';';
 
-    var data = node.innerHTML;
+        node.setAttribute('style', styles + getCSS(node));
+        toIter(children);
+    }
+
+    var data = node.outerHTML;
 
     var uri      = 'data:application/vnd.ms-excel;base64,';
-    var template = '<html xmlns:o="urn:schemas-microsoft-com:office:office"xmlns:x="urn:schemas-microsoft-com:office:excel"xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>';
+    var template = '<html xmlns:o="urn:schemas-microsoft-com:office:office"xmlns:x="urn:schemas-microsoft-com:office:excel"xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body>{table}</body></html>';
 
     var base64_encode   = function (s) { return window.btoa(unescape(encodeURIComponent(s))) };
     var format_template = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
