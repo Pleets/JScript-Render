@@ -48,7 +48,7 @@ JScriptRender.exception.Exception.prototype =
         // Dialog parameters
         set.width = set.width || 300;
 
-        var d = new $jS.html.Dialog({ title: e.name, content: e.message, width: set.width });
+        var d = new JScriptRender.html.Dialog({ title: e.name, content: e.message, width: set.width });
         d.show();
     },
     parse: function(name, message)

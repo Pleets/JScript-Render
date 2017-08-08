@@ -214,7 +214,7 @@ JScriptRender.reader.File.prototype =
          }
          catch(e)
          {
-            var exception = new $jS.exception.Exception(e);
+            var exception = new JScriptRender.exception.Exception(e);
             exception.print();
          }
 
