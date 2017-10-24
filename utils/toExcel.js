@@ -25,12 +25,19 @@ JScriptRender.utils.toExcel = function(node)
 
         for (var k in window.getComputedStyle(node))
         {
+
+            var RegExpr = /^([a-z]+)([A-Z]+)([a-z]+)$/;
+
+            _k = (k.match(RegExpr)) ? k.replace(RegExpr, "$1-$2$3").toLowerCase() : k;
+
             if (parseInt(k) != k)
             {
                 var prop = window.getComputedStyle(node).getPropertyValue(k);
 
                 if (prop.trim() !== '')
                     cssArray.push(k + ": " + prop);
+                else
+                    cssArray.push(_k + ": " + window.getComputedStyle(node)[k]);
             }
         }
 
