@@ -2,7 +2,7 @@
  * JScriptRender (http://www.jscriptrender.com)
  *
  * @link      http://github.com/Pleets/JScript-Render
- * @copyright Copyright (c) 2014-2017 Pleets. (http://www.pleets.org)
+ * @copyright Copyright (c) 2014-2018 Pleets. (http://www.pleets.org)
  * @license   http://www.jscriptrender.com/license
  */
 
@@ -57,6 +57,13 @@ JScriptRender.messagesTemplates = {
 JScriptRender.prototype =
 {
     PATH: '.',
+
+    /**
+     * A list of ready functions to execute on .ready
+     *
+     * @var array
+     */
+    readyFunctions: [],
 
     /**
      * Adds an error
@@ -198,19 +205,34 @@ JScriptRender.prototype =
 
         if (document.readyState == "complete")
             libReady(handler);
-        else {
-            document.onreadystatechange = function ()
-            {
-                if (document.readyState == "complete") {
-                    libReady(handler);
-                }
-            }
-        }
+        else
+            this.readyFunctions.push(handler);
     }
 }
 
 /* Short alias */
 var $jS = new JScriptRender();
+
+document.onreadystatechange = function ()
+{
+    var libReady = function(handler)
+    {
+        setTimeout(function(){
+            if ($jS.state == "complete")
+                handler();
+            else
+                return libReady(handler);
+        }, 100);
+    }
+
+    if (document.readyState == "complete")
+    {
+        for (var i = $jS.readyFunctions.length - 1; i >= 0; i--)
+        {
+            libReady($jS.readyFunctions[i]);
+        }
+    }
+}
 
 /* autoloader */
 try {
